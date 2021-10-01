@@ -72,3 +72,4 @@ crashlytics-build.properties
 
 # Custom part
 .DS_Store
+.vscode
