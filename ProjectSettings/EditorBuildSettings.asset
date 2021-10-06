@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Main/City.unity
+    guid: 0b674dc297adc40a2a70cbb28b04596e
+  - enabled: 1
+    path: Assets/Scenes/Main/Building_052-Lobby.unity
+    guid: 6b2bd9ef1da63459f8debdbb4080c6d3
+  - enabled: 1
+    path: Assets/Scenes/Main/Building_052-Appartment.unity
+    guid: f611fc4cad682410e921e55167f86d92
+  - enabled: 1
     path: Assets/Scenes/Testing/HacksprintWorld_v1.unity
     guid: 68d52aecac8ed482d952b1bfd6f49c99
   - enabled: 1
