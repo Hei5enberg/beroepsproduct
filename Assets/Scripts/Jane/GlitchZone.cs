@@ -5,7 +5,6 @@ using UnityEngine;
 public class GlitchZone : MonoBehaviour {
     AudioSource audioSource;
 
-    public AudioClip glitchZoneSound;
     public GameObject[] glitchZoneComponents;
     bool isAvailable = true;
 
@@ -44,7 +43,7 @@ public class GlitchZone : MonoBehaviour {
     IEnumerator waitForNext() {
         int waitTime = Random.Range(0, 2);
         // yield return new WaitForSeconds(waitTime);
-        yield return new WaitForSeconds(0.2F);
+        yield return new WaitForSeconds(0.1F);
         isAvailable = true;
     }
 
