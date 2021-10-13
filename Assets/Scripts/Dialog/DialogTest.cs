@@ -7,14 +7,13 @@ public class DialogTest : MonoBehaviour {
     PlayerLook playerLook;
     PlayerMove playerMove;
 
+    Transform currentView;
     Transform playerView;
     public Transform npcView;
 
     public GameObject playerCam;
 
     public float transitionSpeed;
-
-    Transform currentView;
 
     void Start() {
         GameObject playerViewObject = GameObject.Find("Player/Normal view");
@@ -51,15 +50,4 @@ public class DialogTest : MonoBehaviour {
 
         playerCam.transform.eulerAngles = currentAngle;
     }
-
-    // public void Test() {
-    //     currentView = npcView;
-    //     StartCoroutine(resetCam());
-    // }
-
-    // IEnumerator resetCam() {
-    //     Debug.Log("Ended");
-    //     yield return new WaitForSeconds(5);
-    //     currentView = playerView;
-    // }
 }
