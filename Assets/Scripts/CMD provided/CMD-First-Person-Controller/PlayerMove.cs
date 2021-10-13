@@ -70,7 +70,7 @@ public class PlayerMove : MonoBehaviour
         {
             movement += transform.up * jumpSpeed;
         }
-      }
+      } else { hasInput = false; }
       
       // make sure the rigidbody isn't sliding around when there's no input
       if (!hasInput) {
