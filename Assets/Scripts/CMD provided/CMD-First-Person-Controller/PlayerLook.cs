@@ -13,16 +13,15 @@ public class PlayerLook : MonoBehaviour
     public float lookSpeed = 3.0f;
     private Vector2 rotation = Vector2.zero;
 
-	public bool lookScriptActive = true;
+	public bool canLook = true;
 
-    void Start()
-    {
-		lookScriptActive = true;
+    void Start() {
       	Cursor.visible = false;
     }
+
     void Update()
     {
-		if (lookScriptActive) {
+		if (canLook) { 
 			//Mac fix
 			Cursor.lockState = CursorLockMode.Locked;
 
@@ -32,8 +31,8 @@ public class PlayerLook : MonoBehaviour
 			transform.eulerAngles = new Vector2(0,rotation.y) * lookSpeed;
 			Camera.main.transform.localRotation = Quaternion.Euler(rotation.x * lookSpeed, 0, 0);
 		} else { 
-			Cursor.lockState = CursorLockMode.None; 
-			Cursor.visible = true;
+			Cursor.lockState = CursorLockMode.None;
+			Cursor.visible = true; 
 		}
     }
 }

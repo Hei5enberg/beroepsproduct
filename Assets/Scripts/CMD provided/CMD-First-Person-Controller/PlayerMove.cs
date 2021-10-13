@@ -10,8 +10,8 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    //Aanpassing
-    public bool moveScriptActive = true;
+    // Modification
+    public bool canMove = true;
 
     Rigidbody rb;
     public float walkingSpeed = 3.0f;
@@ -35,12 +35,11 @@ public class PlayerMove : MonoBehaviour
         normalHeight = transform.localScale.y;
     }
 
-    void FixedUpdate()
-    {
-      if (moveScriptActive) {
-        Vector3 movement = new Vector3();
-        bool hasInput = false;
+    void FixedUpdate() {
+      Vector3 movement = new Vector3();
+      bool hasInput = false;
 
+      if (canMove) {
         // Walking
         if (Input.GetKey(forwardKey))
         {
@@ -71,27 +70,28 @@ public class PlayerMove : MonoBehaviour
         {
             movement += transform.up * jumpSpeed;
         }
-
-        // make sure the rigidbody isn't sliding around when there's no input
-        if (!hasInput) {
-          rb.constraints = 
-            RigidbodyConstraints.FreezePositionX | 
-            RigidbodyConstraints.FreezePositionZ |
-            RigidbodyConstraints.FreezeRotationY |
-            RigidbodyConstraints.FreezeRotationZ;
-        } else {
-          rb.constraints = 
-            RigidbodyConstraints.FreezeRotationY |
-            RigidbodyConstraints.FreezeRotationZ;
-        }
-
-        // maintain vertical speed
-        movement.y += rb.velocity.y;
-
-        // apply movement to rigidbody
-        rb.velocity = movement ;
       }
+      
+      // make sure the rigidbody isn't sliding around when there's no input
+      if (!hasInput) {
+        rb.constraints = 
+          RigidbodyConstraints.FreezePositionX | 
+          RigidbodyConstraints.FreezePositionZ |
+          RigidbodyConstraints.FreezeRotationY |
+          RigidbodyConstraints.FreezeRotationZ;
+      } else {
+        rb.constraints = 
+          RigidbodyConstraints.FreezeRotationY |
+          RigidbodyConstraints.FreezeRotationZ;
+      }
+
+      // maintain vertical speed
+      movement.y += rb.velocity.y;
+
+      // apply movement to rigidbody
+      rb.velocity = movement ;
     }
+    
 
     
 
