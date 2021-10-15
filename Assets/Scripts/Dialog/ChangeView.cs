@@ -12,20 +12,24 @@ public class ChangeView : MonoBehaviour {
 
     public float transitionSpeed;
 
+    bool inPlayerView = false;
+
     void Start() {
         GameObject playerViewObject = GameObject.Find("Player/Normal view");
         playerView = playerViewObject.GetComponent<Transform>();
 
         playerCam = GameObject.Find("Character/Player/Main camera");
 
-        currentView = playerView;
+        switchView();
     }
 
-    public void goToView(bool viewName) {
-        if (viewName) {
-            currentView = targetView;
-        } else if (!viewName) {
+    public void switchView() {
+        if (!inPlayerView) {
             currentView = playerView;
+            inPlayerView = true;
+        } else { 
+            currentView = targetView; 
+            inPlayerView = false;
         }
     }
 

@@ -1,4 +1,4 @@
-ID;Character name;Options;Sentence;Option 1;Option 2;Option 3;Response 1;Response 2;Response 3
-0;Jane;TRUE;;No;1;Knock Knock!;Yes;2;Who's there?
-1;Alex;TRUE;;1+1;2+2;Puff Puff;2;4;Pass
-2;Arno;FALSE;How u doin?;;;;;;
+ID;Character name;Type;Sentence;Option 1;Option 2;Option 3;Response 1;Response 2;Response 3
+0;Jane;0;Hello there;;;;;;
+1;Alex;1;;1+1;2+2;Puff Puff;2;4;Pass
+2;Arno;1;How u doin?;Pretty good;Shit;Great;;;
