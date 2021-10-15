@@ -1334,19 +1334,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8629151, y: 1.8397467, z: 0.45276338}
   m_Center: {x: -0.06854248, y: 0.78664005, z: 0.0072160885}
---- !u!114 &877833244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 877833242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57217c56ffd92447eb88adbe87a6e904, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentSentence: 2
 --- !u!114 &877833245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1390,25 +1377,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetView: {fileID: 941917233}
   transitionSpeed: 5
---- !u!114 &877833247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 877833242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 946c04f217fb64ee28b8fff656f5ad3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-    rows:
-    - row: []
-    - row: []
-    - row: []
-    - row: []
-    - row: []
 --- !u!1 &941917232
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,14 +1587,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1179421718}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 946c04f217fb64ee28b8fff656f5ad3c, type: 3}
+  m_Script: {fileID: 11500000, guid: 0190cc07e91124329b94285b349b56c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data:
-    rows:
-    - row:
-      - Test
-      - Test2
+  dialogData: {fileID: 4900000, guid: 2ad71bdbc9147485cbf715366ea0f823, type: 3}
 --- !u!4 &1179421720
 Transform:
   m_ObjectHideFlags: 0

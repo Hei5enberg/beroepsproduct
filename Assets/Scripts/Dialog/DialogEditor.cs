@@ -1,24 +1,24 @@
-using UnityEngine;
-using UnityEditor;
+// using UnityEngine;
+// using UnityEditor;
 
-[CustomEditor(typeof(Dialog))]
+// [CustomEditor(typeof(Dialog))]
 
-public class DialogEditor : Editor {
-    public override void OnInspectorGUI() {
-        base.OnInspectorGUI();
+// public class DialogEditor : Editor {
+//     public override void OnInspectorGUI() {
+//         base.OnInspectorGUI();
 
-        Dialog dialog = (Dialog)target;
+//         Dialog dialog = (Dialog)target;
 
-        GUILayout.BeginHorizontal();
+//         GUILayout.BeginHorizontal();
 
-        if (GUILayout.Button("Add sentence")) {
-            dialog.addSentence();
-        }
+//         if (GUILayout.Button("Add sentence")) {
+//             dialog.addSentence();
+//         }
 
-        if (GUILayout.Button("Add options sentence")) {
-            dialog.addSentenceWithOptions();
-        }
+//         if (GUILayout.Button("Add options sentence")) {
+//             dialog.addSentenceWithOptions();
+//         }
 
-        GUILayout.EndHorizontal();
-    }
-}
+//         GUILayout.EndHorizontal();
+//     }
+// }
