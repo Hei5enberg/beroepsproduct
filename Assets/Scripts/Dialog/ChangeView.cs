@@ -15,7 +15,7 @@ public class ChangeView : MonoBehaviour {
     bool inPlayerView = false;
 
     void Start() {
-        GameObject playerViewObject = GameObject.Find("Player/Normal view");
+        GameObject playerViewObject = GameObject.Find("Character/Player/Normal view");
         playerView = playerViewObject.GetComponent<Transform>();
 
         playerCam = GameObject.Find("Character/Player/Main camera");

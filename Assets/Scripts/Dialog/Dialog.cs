@@ -5,6 +5,7 @@ using UnityEngine;
 public class Dialog {
     // public int id;
     public string name;
+    public string responderName;
     public int type;
     public string sentence;
     public string option1;

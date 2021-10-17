@@ -1,0 +1,10 @@
+ID;Character name;Responder name;Type;Sentence;Option 1;Option 2;Option 3;Response 1;Response 2;Response 3
+0;Alex (you);;0;Hi Arno, it's been quite a while since I last saw you.;;;;;;
+1;Jane;;0;35 days. (Since you last saw Arno);;;;;;
+2;Arno;;0;Yeah, it has already been 35days. It was about time we  talked again my friend. So how have you been?;;;;;;
+3;Jane;;0;I would advise you to ask him about work.;;;;;;
+4;Alex (you);Arno;1;;I have been doing fine so anyways how's work (Jane'r recommendation);I have been doing pretty good actually;Uhm well things could be better actually things have been stressfull lately;Yeah speaking about work something funny happened yesterday.;Ooh good to hear, goot to hear.;I see so anyways let me tell you a funny story.
+5;Arno;;0;So, at work yesterday a colleague of mine showed up without shoes. He just walked up to the coffee machine while we stared in bewilderment. Isn't that crazy.;;;;;;
+6;Alex (you);Arno;1;;(laughs) Yeah, that's really ridiculous.;Oooh damn was he okay?;That is not really a funny story, Arno.;I know right, what a crazy guy.;Yeah something with his AI or something, anyways doesn't matter.;Weel, dont be such a sourpuss.
+7;Alex (you);;0;So anyways it's getting quite late and I need to work tomorrow, so i'll talk to you later my friend.;;;;;;
+8;Arno;;0;I am gonna stay here for a while and finish this coffee. See ya around.;;;;;;

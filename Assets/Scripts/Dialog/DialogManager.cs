@@ -8,7 +8,7 @@ public class DialogManager : MonoBehaviour {
     List<Dialog> sentences = new List<Dialog>();
 
     ChangeView changeView;
-    GameObject player;
+    GameObject player, crosshair, continueText;
     PlayerLook playerLook;
     PlayerMove playerMove;
     MeshRenderer playerMesh;    
@@ -17,16 +17,10 @@ public class DialogManager : MonoBehaviour {
     public Text title;
     public Text message;
     public GameObject option1, option2 , option3;
-    // public Button option2;
-    // public Button option3;
 
     Text option1Text;
     Text option2Text;
-    Text option3Text;
-
-    // Button option1Btn;
-
-    Test test;
+    Text option3Text; 
 
     bool dialogActive = false;
     bool option1Clicked;
@@ -38,6 +32,9 @@ public class DialogManager : MonoBehaviour {
 
         changeView = GetComponent<ChangeView>();
 
+        crosshair = GameObject.Find("Character/UI/Crosshair");
+        continueText = GameObject.Find("Character/UI/Dialog/Continue");
+
         player = GameObject.Find("Player");
         playerLook = player.GetComponent<PlayerLook>();
         playerMove = player.GetComponent<PlayerMove>();
@@ -47,29 +44,13 @@ public class DialogManager : MonoBehaviour {
         option2Text = option2.GetComponentInChildren<Text>();
         option3Text = option3.GetComponentInChildren<Text>();
         
-        // Button btn = option1.GetComponent<Button>();
-        // option2 = option2.GetComponent<Button>();
-        // option3 = option3.GetComponent<Button>();
         Button option1Btn = option1.GetComponent<Button>();
         Button option2Btn = option2.GetComponent<Button>();
         Button option3Btn = option3.GetComponent<Button>();
 
-        // btn.onClick.AddListener(testFunction);
-        option1Btn.onClick.AddListener(delegate {catchButtonPress(0); } );
-        option2Btn.onClick.AddListener(delegate {catchButtonPress(1); } );
-        option3Btn.onClick.AddListener(delegate {catchButtonPress(2); } );
-    }
-
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            changeMode();
-            StartCoroutine(executeDialog());
-        }
-
-        // Debug.Log("Button states: ");
-        // Debug.Log(option1Clicked);
-        // Debug.Log(option2Clicked);
-        // Debug.Log(option3Clicked);
+        option1Btn.onClick.AddListener(delegate {catchPressOfButton(0); } );
+        option2Btn.onClick.AddListener(delegate {catchPressOfButton(1); } );
+        option3Btn.onClick.AddListener(delegate {catchPressOfButton(2); } );
     }
 
     public void startDialog() {
@@ -77,7 +58,7 @@ public class DialogManager : MonoBehaviour {
         StartCoroutine(executeDialog());
     }
 
-    public void catchButtonPress(int buttonNumber) {
+    public void catchPressOfButton(int buttonNumber) {
         if (buttonNumber == 0) {
             option1Clicked = true;
         } else if (buttonNumber == 1) {
@@ -85,6 +66,7 @@ public class DialogManager : MonoBehaviour {
         } else if (buttonNumber == 2) { 
             option3Clicked = true; 
         } else if (buttonNumber == 3) {
+            // Resetting states
             option1Clicked = false;
             option2Clicked = false;
             option3Clicked = false; 
@@ -102,15 +84,21 @@ public class DialogManager : MonoBehaviour {
 
     public IEnumerator executeDialog() {
         dialogParent.SetActive(true);
+        crosshair.SetActive(false);
+
         foreach (Dialog d in sentences) {
             if (d.type == 0) {
-                optionsState(false);
+                optionsDisplayState(false);
+                continueText.SetActive(true);
 
                 title.text = d.name;
                 message.text = d.sentence;
-                yield return waitForInput(0);
+                yield return waitForInput("keyPress");
             } else if (d.type == 1) {
-                optionsState(true);
+                // Turn on dialog elements and display options
+                optionsDisplayState(true);
+                continueText.SetActive(false);
+                message.text = "";
 
                 title.text = d.name;
                 if (d.sentence != null) { message.text = d.sentence; }
@@ -118,8 +106,11 @@ public class DialogManager : MonoBehaviour {
                 option2Text.text = d.option2;
                 option3Text.text = d.option3;
 
-                yield return waitForInput(1);
-                optionsState(false);
+                // Wait for response of player
+                yield return waitForInput("optionInteract");
+                optionsDisplayState(false);
+                title.text = d.responderName;
+               
                 if (option1Clicked) {
                     message.text = d.response1;
                 } else if (option2Clicked) {
@@ -129,28 +120,29 @@ public class DialogManager : MonoBehaviour {
                 } else {
                     message.text = "Error";
                 }
-                yield return waitForInput(0);
-                catchButtonPress(3);
+                yield return waitForInput("keyPress");
+                catchPressOfButton(3);
             }
         }
         dialogParent.SetActive(false);
+        crosshair.SetActive(true);
         changeMode();
     }
 
-    void optionsState(bool state) {
+    void optionsDisplayState(bool state) {
         option1.SetActive(state);
         option2.SetActive(state);
         option3.SetActive(state);
     }
 
-    private IEnumerator waitForInput(int condition) {
+    private IEnumerator waitForInput(string condition) {
         bool done = false;
         while(!done) {
-            if (condition == 0) {
-                if (Input.GetKeyDown(KeyCode.F)) {
+            if (condition == "keyPress") {
+                if (Input.GetKeyDown(KeyCode.Space)) {
                     done = true;
                 }
-            } else if (condition == 1) {
+            } else if (condition == "optionInteract") {
                 if (option1Clicked || option2Clicked || option3Clicked) {
                     done = true;
                 }
@@ -159,10 +151,7 @@ public class DialogManager : MonoBehaviour {
         }
     }
 
-    public void testFunction() {
-        Debug.Log("You did a thing");
-    }
-
+    // Function to load the dialog csv file into the Dialog.cs class
     void LoadDialog() {
         string[] data = dialogData.text.Split(new char[] { '\n' });
         
@@ -171,28 +160,30 @@ public class DialogManager : MonoBehaviour {
             Dialog d = new Dialog();
 
             int sentenceType;
-            int.TryParse(row[2], out sentenceType);
+            int.TryParse(row[3], out sentenceType);
 
-            if ( sentenceType == 0) {
+            if ( sentenceType == 0 ) {
                 d.name = row[1];
                 d.type = sentenceType;
-                d.sentence = row[3];
-            } else if ( sentenceType == 1) {
+                d.sentence = row[4];
+            } else if ( sentenceType == 1 ) {
                 d.name = row[1];
+                d.responderName = row[2];
                 d.type = sentenceType;
-                d.option1 = row[4];
-                d.option2 = row[5];
-                d.option3 = row[6];
-                d.response1 = row[7];
-                d.response2 = row[8];
-                d.response3 = row[9];
-            } else {
+                d.option1 = row[5];
+                d.option2 = row[6];
+                d.option3 = row[7];
+                d.response1 = row[8];
+                d.response2 = row[9];
+                d.response3 = row[10];
+            } else if ( sentenceType == 2 ) {
                 d.name = row[1];
+                d.responderName = row[2];
                 d.type = sentenceType;
-                d.sentence = row[3];
-                d.option1 = row[4];
-                d.option2 = row[5];
-                d.option3 = row[6];
+                d.sentence = row[4];
+                d.option1 = row[5];
+                d.option2 = row[6];
+                d.option3 = row[7];
             }
             sentences.Add(d);
         }
