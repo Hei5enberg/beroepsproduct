@@ -1346,11 +1346,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97de824e00e9498a8663bd23aa63da9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogData: {fileID: 4900000, guid: 2ad71bdbc9147485cbf715366ea0f823, type: 3}
+  dialogData: {fileID: 4900000, guid: 602500039ba354e31baa4b4a8552afcc, type: 3}
   dialogParent: {fileID: 1565911752}
   title: {fileID: 1171524998}
   message: {fileID: 1893329391}
-  option1: {fileID: 700993221}
+  option1: {fileID: 700993219}
   option2: {fileID: 367914093}
   option3: {fileID: 609302557}
 --- !u!114 &877833245
@@ -1370,9 +1370,9 @@ MonoBehaviour:
   interactFunction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 877833244}
         m_TargetAssemblyTypeName: DialogManager, Assembly-CSharp
-        m_MethodName: dialogInitiate
+        m_MethodName: startDialog
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1396,19 +1396,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetView: {fileID: 941917233}
   transitionSpeed: 5
---- !u!114 &877833247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 877833242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3141bfa0b1ba4c9bb0503fc284ac6fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  randomNumber: 0
 --- !u!1 &941917232
 GameObject:
   m_ObjectHideFlags: 0
@@ -2437,7 +2424,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1878203665
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2470,7 +2457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
