@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ChangeView : MonoBehaviour {
-    GameObject playerCam;
+    public GameObject playerCam;
+    public GameObject playerViewObject;
     GameObject player;
 
     Transform currentView;
@@ -15,11 +16,11 @@ public class ChangeView : MonoBehaviour {
     bool inPlayerView = false;
 
     void Start() {
-        GameObject playerViewObject = GameObject.Find("Character/Player/Normal view");
+        // GameObject playerViewObject = GameObject.Find("Player/Normal view");
+        Debug.Log(playerViewObject);
         playerView = playerViewObject.GetComponent<Transform>();
 
-        playerCam = GameObject.Find("Character/Player/Main camera");
-
+        // playerCam = GameObject.Find("Player/Main camera");
         switchView();
     }
 
@@ -34,6 +35,8 @@ public class ChangeView : MonoBehaviour {
     }
 
     void FixedUpdate() {
+        // Debug.Log("Player camera" + playerCam.transform.position);
+        // Debug.Log("Player camera" + currentView.position);
         if (playerCam.transform.position != currentView.position) {
             //Lerp position
             playerCam.transform.position = Vector3.Lerp(playerCam.transform.position, currentView.position, Time.deltaTime * transitionSpeed);

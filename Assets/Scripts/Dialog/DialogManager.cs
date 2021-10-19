@@ -8,16 +8,17 @@ public class DialogManager : MonoBehaviour {
     List<Dialog> sentences = new List<Dialog>();
 
     ChangeView changeView;
-    GameObject player, crosshair, continueText;
+    GameObject player, crosshair, continueText, dialogParent, janeTalking,
+    titleObject, messageObject, option1, option2, option3;
     PlayerLook playerLook;
     PlayerMove playerMove;
     MeshRenderer playerMesh;    
 
-    public GameObject dialogParent;
-    public Text title;
-    public Text message;
-    public GameObject option1, option2 , option3;
-
+    // public Text title;
+    // public Text message;
+    // public GameObject option1, option2 , option3;
+    Text title;
+    Text message;
     Text option1Text;
     Text option2Text;
     Text option3Text; 
@@ -33,12 +34,22 @@ public class DialogManager : MonoBehaviour {
         changeView = GetComponent<ChangeView>();
 
         crosshair = GameObject.Find("Character/UI/Crosshair");
-        continueText = GameObject.Find("Character/UI/Dialog/Continue");
+        dialogParent = GameObject.Find("Character/UI/Dialog");
+        janeTalking = GameObject.Find("Character/UI/Dialog/JaneTalking");
+        titleObject = GameObject.Find("Character/UI/Dialog/Title");
+        messageObject = GameObject.Find("Character/UI/Dialog/Text");
+        option1 = GameObject.Find("Character/UI/Dialog/Option 1");
+        option2 = GameObject.Find("Character/UI/Dialog/Option 2");
+        option3 = GameObject.Find("Character/UI/Dialog/Option 3");
 
+        continueText = GameObject.Find("Character/UI/Dialog/Continue");
+        
         player = GameObject.Find("Player");
         playerLook = player.GetComponent<PlayerLook>();
         playerMove = player.GetComponent<PlayerMove>();
         playerMesh = player.GetComponent<MeshRenderer>();
+        title = titleObject.GetComponent<Text>();
+        message = messageObject.GetComponent<Text>();
 
         option1Text = option1.GetComponentInChildren<Text>();
         option2Text = option2.GetComponentInChildren<Text>();
@@ -90,6 +101,10 @@ public class DialogManager : MonoBehaviour {
             if (d.type == 0) {
                 optionsDisplayState(false);
                 continueText.SetActive(true);
+                
+                if ((d.name).ToLower() == "jane") {
+                    janeTalking.SetActive(true);
+                }
 
                 title.text = d.name;
                 message.text = d.sentence;
@@ -99,6 +114,10 @@ public class DialogManager : MonoBehaviour {
                 optionsDisplayState(true);
                 continueText.SetActive(false);
                 message.text = "";
+
+                if ((d.name).ToLower() == "jane") {
+                    janeTalking.SetActive(true);
+                }
 
                 title.text = d.name;
                 if (d.sentence != null) { message.text = d.sentence; }
@@ -123,9 +142,11 @@ public class DialogManager : MonoBehaviour {
                 yield return waitForInput("keyPress");
                 catchPressOfButton(3);
             }
+            janeTalking.SetActive(false);
         }
         dialogParent.SetActive(false);
         crosshair.SetActive(true);
+        
         changeMode();
     }
 
