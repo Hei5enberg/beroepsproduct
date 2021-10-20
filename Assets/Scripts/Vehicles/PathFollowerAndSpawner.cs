@@ -30,27 +30,25 @@ namespace PathCreation.Examples
         }
 
         void Update() {
-            StartCoroutine(followPath(vehicles[0]));
-
-            // int carIndex = Random.Range(0, vehicles.Length);
-            // GameObject currentCar = vehicles[carIndex];
-            // GameObject currentCar;
-
-            // if (pathCreator != null)
-            // {
-            //     for (int i = 0; i < vehicles.Length; i++) {
-            //         currentCar = vehicles[i];
-            //         distanceTravelled += speed * Time.deltaTime;
-            //         currentCar.transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-            //         currentCar.transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
-            //     }
-            // }
+            // StartCoroutine(followPath(0));
         }
 
-        private void followPath(int object) {
-            distanceTravelled += speed * Time.deltaTime;
-            object.transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-            object.transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+        // void followPath(int object) {
+        //     GameObject objectToMove = vehicles[object];
+
+        //     distanceTravelled += speed * Time.deltaTime;
+        //     objectToMove.transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
+        //     objectToMove.transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+        // }
+
+        public void vehicleSpawner() {
+            int vehiclesToSpawn = Random.Range(0, vehicles.Length);
+            int[] vehicleIndexes = new int[vehiclesToSpawn];
+            int timeInBetween = Random.Range(1, 5);
+
+            
+            
+
         }
 
         // If the path changes during the game, update the distance travelled so that the follower's position on the new path
