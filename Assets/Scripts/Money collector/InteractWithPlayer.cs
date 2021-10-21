@@ -8,6 +8,7 @@ public class InteractWithPlayer : MonoBehaviour
 
     public Transform player;
     public UnityEngine.AI.NavMeshAgent agent;
+    public GameObject otherCollector;
     public bool foundPlayer = false;
 
     void Start() {
@@ -25,8 +26,8 @@ public class InteractWithPlayer : MonoBehaviour
         }
     }
 
-    void OnTriggerStay() {
-        Debug.Log("Cunt");
+    void OnTriggerEnter() {
+        otherCollector.SetActive(false);
         foundPlayer = true;
         animator.SetTrigger("Stop walking");
     }

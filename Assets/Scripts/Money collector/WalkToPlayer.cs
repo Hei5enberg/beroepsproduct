@@ -21,25 +21,20 @@ public class WalkToPlayer : MonoBehaviour
 
     void Update() {
         arrivedAtPlayer = interactWithPlayer.foundPlayer;
-        Debug.Log("Foundplayer: " + arrivedAtPlayer);
         if (arrivedAtPlayer) {
-            Debug.Log("Bongo");
             agent.isStopped = true;
         }
         else if (goToPlayer && !arrivedAtPlayer) { 
-            Debug.Log("Bingo");
             agent.isStopped = false;
             agent.SetDestination(player.position); 
         }
     }
 
     void OnTriggerEnter() {
-        animator.SetTrigger("Start walking");
         goToPlayer = true;
     }
 
     void OnTriggerExit() {
-        animator.SetTrigger("Stop walking");
         goToPlayer = false;
     }
 }

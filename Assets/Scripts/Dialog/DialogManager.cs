@@ -7,6 +7,14 @@ public class DialogManager : MonoBehaviour {
     public TextAsset dialogData;
     List<Dialog> sentences = new List<Dialog>();
 
+    public AudioClip[] audioClips;
+    public int audioArrayIndex = 0;
+    AudioSource audioSource;
+
+    public bool doEyesTurnBlue;
+    public GameObject blueEyes;
+    Animator animator;
+
     ChangeView changeView;
     GameObject player, crosshair, continueText, dialogParent, janeTalking,
     titleObject, messageObject, option1, option2, option3;
@@ -14,9 +22,6 @@ public class DialogManager : MonoBehaviour {
     PlayerMove playerMove;
     MeshRenderer playerMesh;    
 
-    // public Text title;
-    // public Text message;
-    // public GameObject option1, option2 , option3;
     Text title;
     Text message;
     Text option1Text;
@@ -30,6 +35,8 @@ public class DialogManager : MonoBehaviour {
 
     void Start() {
         LoadDialog();
+
+        audioSource = GetComponent<AudioSource>();
 
         changeView = GetComponent<ChangeView>();
 
@@ -98,13 +105,25 @@ public class DialogManager : MonoBehaviour {
         crosshair.SetActive(false);
 
         foreach (Dialog d in sentences) {
+            Debug.Log("id: " + d.id);
             if (d.type == 0) {
                 optionsDisplayState(false);
                 continueText.SetActive(true);
+
+                if (d.id == 1) {
+                    dialogParent.SetActive(false);
+                    blueEyes.SetActive(true);
+                    yield return new WaitForSeconds(2);
+                    dialogParent.SetActive(true);
+                    blueEyes.SetActive(false);
+                }
                 
                 if ((d.name).ToLower() == "jane") {
                     janeTalking.SetActive(true);
                 }
+
+                audioSource.PlayOneShot(audioClips[audioArrayIndex]);
+                audioArrayIndex++;
 
                 title.text = d.name;
                 message.text = d.sentence;
@@ -119,8 +138,19 @@ public class DialogManager : MonoBehaviour {
                     janeTalking.SetActive(true);
                 }
 
+                if (d.id == 1) {
+                    dialogParent.SetActive(true);
+                    title.text = "";
+                    message.text = "";
+                    blueEyes.SetActive(true);
+                    yield return new WaitForSeconds(2);
+                    blueEyes.SetActive(false);
+                    dialogParent.SetActive(false);
+                }
+
                 title.text = d.name;
                 if (d.sentence != null) { message.text = d.sentence; }
+
                 option1Text.text = d.option1;
                 option2Text.text = d.option2;
                 option3Text.text = d.option3;
@@ -131,11 +161,32 @@ public class DialogManager : MonoBehaviour {
                 title.text = d.responderName;
                
                 if (option1Clicked) {
+                    audioSource.PlayOneShot(audioClips[audioArrayIndex]);
+                    yield return new WaitForSeconds(audioClips[audioArrayIndex].length);
+                    audioArrayIndex = audioArrayIndex + 3;
+                    
                     message.text = d.response1;
+                    continueText.SetActive(true);
+                    audioSource.PlayOneShot(audioClips[audioArrayIndex]);
+                    audioArrayIndex = audioArrayIndex + 3;
                 } else if (option2Clicked) {
+                    audioSource.PlayOneShot(audioClips[audioArrayIndex + 1]);
+                    yield return new WaitForSeconds(audioClips[audioArrayIndex].length);
+                    audioArrayIndex = audioArrayIndex + 3;
+
                     message.text = d.response2;
+                    continueText.SetActive(true);
+                    audioSource.PlayOneShot(audioClips[audioArrayIndex + 1]);
+                    audioArrayIndex = audioArrayIndex + 3;
                 } else if (option3Clicked) {
+                    audioSource.PlayOneShot(audioClips[audioArrayIndex + 2]);
+                    yield return new WaitForSeconds(audioClips[audioArrayIndex].length);
+                    audioArrayIndex = audioArrayIndex + 3;
+
                     message.text = d.response3;
+                    continueText.SetActive(true);
+                    audioSource.PlayOneShot(audioClips[audioArrayIndex + 2]);
+                    audioArrayIndex = audioArrayIndex + 3;
                 } else {
                     message.text = "Error";
                 }
@@ -144,6 +195,7 @@ public class DialogManager : MonoBehaviour {
             }
             janeTalking.SetActive(false);
         }
+        audioArrayIndex = 0;
         dialogParent.SetActive(false);
         crosshair.SetActive(true);
         
@@ -175,6 +227,8 @@ public class DialogManager : MonoBehaviour {
     // Function to load the dialog csv file into the Dialog.cs class
     void LoadDialog() {
         string[] data = dialogData.text.Split(new char[] { '\n' });
+
+        Debug.Log("File length: " + data.Length);
         
         for (int i = 1; i < data.Length; i++) {
             string[] row = data[i].Split(new char[] { ';' });
@@ -183,14 +237,17 @@ public class DialogManager : MonoBehaviour {
             int sentenceType;
             int.TryParse(row[3], out sentenceType);
 
+            int ID;
+            int.TryParse(row[0], out ID);
+            d.id = ID;
+            d.name = row[1];
+
             if ( sentenceType == 0 ) {
-                d.name = row[1];
                 d.type = sentenceType;
                 d.sentence = row[4];
             } else if ( sentenceType == 1 ) {
-                d.name = row[1];
-                d.responderName = row[2];
                 d.type = sentenceType;
+                d.responderName = row[2];
                 d.option1 = row[5];
                 d.option2 = row[6];
                 d.option3 = row[7];
@@ -198,9 +255,8 @@ public class DialogManager : MonoBehaviour {
                 d.response2 = row[9];
                 d.response3 = row[10];
             } else if ( sentenceType == 2 ) {
-                d.name = row[1];
-                d.responderName = row[2];
                 d.type = sentenceType;
+                d.responderName = row[2];
                 d.sentence = row[4];
                 d.option1 = row[5];
                 d.option2 = row[6];
@@ -209,4 +265,10 @@ public class DialogManager : MonoBehaviour {
             sentences.Add(d);
         }
     }
+
+    // IEnumerator turnEyesOff() {
+    //     yield return new WaitForSeconds(3);
+    //     blueEyes.SetActive(false);
+    // }
 }
+
