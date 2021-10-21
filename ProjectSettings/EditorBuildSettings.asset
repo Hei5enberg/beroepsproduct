@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Main/City.unity
     guid: 0b674dc297adc40a2a70cbb28b04596e
   - enabled: 0
@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Testing/Menu.unity
     guid: 303e30ea31b7e4ec385baeffc23f637d
+  - enabled: 1
+    path: Assets/Scenes/Main/Paul's diner.unity
+    guid: 9d7c565ec0eec4027bba5ca39ceea9b4
   m_configObjects: {}
