@@ -13,6 +13,6 @@ public class Minimap : MonoBehaviour
         transform.position = newPosition;
 
         // Rotating the Camera
-        transform.rotation = Quaternion.Euler(90f, player.eulerAngles.y, 0f);
+        transform.rotation = Quaternion.Euler(45f, player.eulerAngles.y, 0f);
     }
 }

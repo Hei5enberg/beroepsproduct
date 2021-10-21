@@ -105,7 +105,6 @@ public class DialogManager : MonoBehaviour {
         crosshair.SetActive(false);
 
         foreach (Dialog d in sentences) {
-            Debug.Log("id: " + d.id);
             if (d.type == 0) {
                 optionsDisplayState(false);
                 continueText.SetActive(true);
@@ -227,9 +226,7 @@ public class DialogManager : MonoBehaviour {
     // Function to load the dialog csv file into the Dialog.cs class
     void LoadDialog() {
         string[] data = dialogData.text.Split(new char[] { '\n' });
-
-        Debug.Log("File length: " + data.Length);
-        
+    
         for (int i = 1; i < data.Length; i++) {
             string[] row = data[i].Split(new char[] { ';' });
             Dialog d = new Dialog();
@@ -265,10 +262,4 @@ public class DialogManager : MonoBehaviour {
             sentences.Add(d);
         }
     }
-
-    // IEnumerator turnEyesOff() {
-    //     yield return new WaitForSeconds(3);
-    //     blueEyes.SetActive(false);
-    // }
 }
-

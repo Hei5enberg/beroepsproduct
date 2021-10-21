@@ -16,7 +16,6 @@ public class ChangeView : MonoBehaviour {
     bool inPlayerView = false;
 
     void Start() {
-        // GameObject playerViewObject = GameObject.Find("Player/Normal view");
         Debug.Log(playerViewObject);
         playerView = playerViewObject.GetComponent<Transform>();
 
@@ -35,8 +34,6 @@ public class ChangeView : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        // Debug.Log("Player camera" + playerCam.transform.position);
-        // Debug.Log("Player camera" + currentView.position);
         if (playerCam.transform.position != currentView.position) {
             //Lerp position
             playerCam.transform.position = Vector3.Lerp(playerCam.transform.position, currentView.position, Time.deltaTime * transitionSpeed);
