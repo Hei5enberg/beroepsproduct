@@ -31,10 +31,12 @@ public class WalkToPlayer : MonoBehaviour
     }
 
     void OnTriggerEnter() {
+        animator.SetTrigger("Start walking");
         goToPlayer = true;
     }
 
     void OnTriggerExit() {
+        animator.SetTrigger("Stop walking");
         goToPlayer = false;
     }
 }

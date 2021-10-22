@@ -14,6 +14,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main/Paul's diner.unity
     guid: 9d7c565ec0eec4027bba5ca39ceea9b4
+  - enabled: 1
+    path: Assets/Scenes/Main/CityAfterGlitch.unity
+    guid: ec7f00577c42240e4b88f330e6a5af98
+  - enabled: 1
+    path: Assets/Scenes/Main/Alex_appartment.unity
+    guid: 26df395838f284f07af9ac73d5059c7d
   - enabled: 0
     path: Assets/Scenes/Main/Building_052-Lobby.unity
     guid: 6b2bd9ef1da63459f8debdbb4080c6d3

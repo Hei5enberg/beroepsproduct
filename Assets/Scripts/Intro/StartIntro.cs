@@ -6,6 +6,7 @@ public class StartIntro : MonoBehaviour
 {
     DialogManager dialogManager;
     bool introPlayed = false;
+    public bool isFinalDialog;
 
     void Start() {
         dialogManager = GetComponent<DialogManager>();
@@ -14,5 +15,10 @@ public class StartIntro : MonoBehaviour
     void OnTriggerEnter() {
         introPlayed = true;
         dialogManager.startDialog();
+
+        if (isFinalDialog) {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 }
