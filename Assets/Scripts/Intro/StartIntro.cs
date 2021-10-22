@@ -13,8 +13,10 @@ public class StartIntro : MonoBehaviour
     }
 
     void OnTriggerEnter() {
+        if (!introPlayed) {
+            dialogManager.startDialog();
+        }
         introPlayed = true;
-        dialogManager.startDialog();
 
         if (isFinalDialog) {
             Cursor.visible = true;
